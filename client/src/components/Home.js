@@ -68,7 +68,7 @@ export default function Home() {
       </Carousel>
 
       <Row>
-        <Col style={{ margin: "0 16px 8px", padding: "8px", backgroundColor: "rgb(78, 255, 132)", textAlign: 'center' }}>STALL</Col>
+        <Col style={{ margin: "0 16px 8px", padding: "8px", backgroundColor: "rgb(20, 120, 130)", textAlign: 'center' }}>STALL</Col>
       </Row>
 
       {!!stall ? <>
@@ -106,8 +106,8 @@ export default function Home() {
         </Row>}
 
       <Row>
-        <Col style={{ margin: "8px 16px 4px", padding: "8px", backgroundColor: "rgb(78, 255, 132)", textAlign: 'center' }}>
-          <Button><Link style={{ color: 'rgb(255, 255, 255)' }} to='/checkout'>THANH TOÁN</Link></Button>
+        <Col style={{ margin: "8px 16px 4px", padding: "8px", backgroundColor: "rgb(20, 120, 130)", textAlign: 'center' }}>
+          <Button><Link style={{ color: 'rgb(255, 255, 255)' }} to='/checkout'>Checkout</Link></Button>
         </Col>
       </Row>
     </>
