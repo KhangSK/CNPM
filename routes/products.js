@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const passport = require('passport')
-const multer = require('multer')
+const multer = require('multer')//package upload images
 
 const upload = multer({ dest: 'public/images/' })
 
@@ -9,6 +9,7 @@ const isAdmin = require('../middleware/isAdmin')
 const Product = require('../models/Product')
 const Stall = require('../models/Stall')
 
+// get all products
 router.get('/', async (req, res) => {
   try {
     const products = await Product.find()
@@ -68,7 +69,5 @@ router.post('/stalls',
       res.status(500).json({ server: 'ERROR' })
     }
   })
-
-
 
 module.exports = router

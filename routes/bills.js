@@ -6,10 +6,8 @@ const isAdmin = require('../middleware/isAdmin')
 const Bill = require('../models/Bill')
 const User = require('../models/User')
 
-router.get('/',
-  passport.authenticate('jwt', { session: false }),
-  isAdmin,
-  async (req, res) => {
+// get all bills by admin
+router.get('/',  passport.authenticate('jwt', { session: false }),  isAdmin,  async (req, res) => {
     try {
       let bills = await Bill.find()
       bills = await Promise.all(bills.map(async bill => {

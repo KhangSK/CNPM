@@ -3,6 +3,7 @@ import { Row, Col, Button } from 'react-bootstrap'
 import { Redirect } from 'react-router-dom'
 
 import { GlobalContext } from '../context/GlobalContext'
+import { toast } from 'react-toastify'
 
 export default function Checkout() {
   const { user, products, addProductToBill, minusProductFromBill, bill, checkout, isAuthenticated } = useContext(GlobalContext)
@@ -18,6 +19,22 @@ export default function Checkout() {
     return products.find(product => product._id == id)
   }
 
+  const checkoutBill = (bill) => {
+    if(Object.keys(bill).length !== 0) {
+      checkout(bill)
+    } else {
+      toast.warn('No bill to checkout!', {
+        position: "top-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+  }
+
   return (
     isAuthenticated ? <div style={{ margin: '0 20%', padding: '76px 0 20px', textAlign: 'center', backgroundColor: 'rgb(232, 232, 232)', minHeight: '90vh' }}>
       <h3>Bill ID: {dd + mm + yyyy}</h3>
@@ -25,7 +42,7 @@ export default function Checkout() {
       <div>{user.name}</div>
       <div>{mm + '/' + dd + '/' + yyyy}</div>
 
-      {bill ? Object.keys(bill).map(e => {
+      {Object.keys(bill).length !== 0 ? Object.keys(bill).map(e => {
         let product = getProductById(e)
         if (product) {
           total += product.price * bill[`${e}`]
@@ -47,18 +64,20 @@ export default function Checkout() {
           </Col>
           <Col style={{ textAlign: 'right', paddingRight: '56px' }} lg={6}>
             {product.price * bill[`${e}`]} VNĐ
-    </Col>
+          </Col>
         </Row> : ''
-      }) : ''}
+        
+      }) : <h4>No products to checkout</h4>}
 
-      <Row>
+      {Object.keys(bill).length !== 0 ? <><Row>
         <Col style={{ textAlign: 'left', paddingLeft: '56px' }} lg={6}>Total:</Col>
         <Col style={{ textAlign: 'right', paddingRight: '56px' }} lg={6}>
           {total} VNĐ
-      </Col>
+        </Col>
       </Row>
+      <Button onClick={() => checkoutBill(bill)} style={{ margin: '20px' }}>PAY BILL</Button></> : ''}
+      
 
-      <Button onClick={() => checkout(bill)} style={{ margin: '20px' }}>PAY BILL</Button>
     </div > : <Redirect to='/' />
   )
 }

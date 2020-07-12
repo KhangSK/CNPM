@@ -62,7 +62,7 @@ export const GlobalProvider = ({ children }) => {
       setCurrentUser(token)
     } catch (err) {
       toast.warn('Login Failed!', {
-        position: "top-right",
+        position: "top-left",
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
@@ -78,7 +78,7 @@ export const GlobalProvider = ({ children }) => {
       const res = await axios.post(`/api/auth/register`, userData)
 
       toast.success('Register Successful!', {
-        position: "top-right",
+        position: "top-left",
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
@@ -88,7 +88,7 @@ export const GlobalProvider = ({ children }) => {
       });
     } catch (err) {
       toast.warn('Register Failed!', {
-        position: "top-right",
+        position: "top-left",
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
@@ -134,7 +134,7 @@ export const GlobalProvider = ({ children }) => {
 
   function addProductToBill(id) {
     toast.success('ADDED!', {
-      position: "top-right",
+      position: "top-left",
       autoClose: 5000,
       hideProgressBar: false,
       closeOnClick: true,
@@ -164,7 +164,7 @@ export const GlobalProvider = ({ children }) => {
 
   function minusProductFromBill(id) {
     toast.success('MINUS!', {
-      position: "top-right",
+      position: "top-left",
       autoClose: 5000,
       hideProgressBar: false,
       closeOnClick: true,
@@ -178,7 +178,6 @@ export const GlobalProvider = ({ children }) => {
       if (bill[`${id}`] == 1) {
         delete bill[`${id}`]
       } else {
-        alert('1')
         bill[`${id}`] += -1
       }
 
@@ -199,7 +198,7 @@ export const GlobalProvider = ({ children }) => {
           type: 'CLEAR_BILL'
         })
         toast.success('Checkout Successful!', {
-          position: "top-right",
+          position: "top-left",
           autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: true,
@@ -210,7 +209,7 @@ export const GlobalProvider = ({ children }) => {
       }
     } catch (err) {
       toast.warn('ERROR!', {
-        position: "top-right",
+        position: "top-left",
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,

@@ -2,11 +2,12 @@ const createError = require('http-errors')
 const express = require('express')
 const path = require('path')
 const cookieParser = require('cookie-parser')
-const logger = require('morgan')
+const logger = require('morgan')// xem get post
+///
 const passport = require('passport')
 const cors = require('cors')
-
-var corsOptions = {
+//cors pack
+const corsOptions = {
   origin: 'localhost:3000',
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
@@ -28,7 +29,7 @@ const app = express()
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'jade')
 
-app.use(logger('dev'))
+app.use(logger('dev'))// xem get post
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())

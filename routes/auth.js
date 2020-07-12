@@ -20,9 +20,11 @@ router.post('/register', async (req, res) => {
     if (emailExists) {
       return res.status(400).json({ email: 'Email is exists' })
     }
-    // save user
+
+    // hash password
     const salt = await bcryptjs.genSalt(10)
     const hash = await bcryptjs.hash(password, salt)
+
     const newUser = new User({
       name: name,
       email: email,
@@ -35,7 +37,7 @@ router.post('/register', async (req, res) => {
     return res.status(400).json(error)
   }
 })
-
+//check tk
 router.post('/login', async (req, res) => {
   try {
     const { errors, isValid } = loginValidation(req.body)
