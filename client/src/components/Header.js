@@ -88,12 +88,12 @@ export default function Header() {
       <Navbar fixed="top" bg="dark" variant="dark">
         <Navbar.Brand href="/">
           <img
-            src="https://react-bootstrap.netlify.app/logo.svg"
+            src="https://scontent.fdad1-1.fna.fbcdn.net/v/t1.15752-9/107902676_641039173459121_7538518412986259566_n.png?_nc_cat=100&_nc_sid=b96e70&_nc_ohc=K6JcOp03ofgAX--diFU&_nc_ht=scontent.fdad1-1.fna&oh=3d531858c39696e42fdb5ce8c9cdcd38&oe=5F30AD6D"
             width="30"
             height="30"
             className="d-inline-block align-top"
-            alt="React Bootstrap logo"
-          />{' '} LOGO
+            
+          />{' '}
       </Navbar.Brand>
         {/* <Navbar.Toggle /> */}
         <Navbar.Collapse className="justify-content-end">
