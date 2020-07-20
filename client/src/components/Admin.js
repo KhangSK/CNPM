@@ -1,8 +1,10 @@
-import React, { useContext, useState, useEffect } from 'react'
-import { Row, Col, Tabs, Tab, Table, Card, Button, Form, Modal } from 'react-bootstrap'
-import { Redirect } from 'react-router-dom'
-import jwt_decode from 'jwt-decode'
-import axios from 'axios'
+import React, { useContext, useState, useEffect } from 'react';
+import { Row, Col, Tabs, Tab, Table, Card, Button, Form, Modal } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
+import jwt_decode from 'jwt-decode';
+import axios from 'axios';
+import { CSVLink, CSVDownload } from "react-csv";
+import { Link } from 'react-router-dom'
 
 import { GlobalContext } from '../context/GlobalContext'
 
@@ -36,6 +38,13 @@ export default function Admin() {
   const [stall2, setStall2] = useState('')
   const [selectedFile, setSelectedFile] = useState(null)
 
+  const headers = [
+    { label: "#", key: "number" },
+    { label: "Name", key: "name" },
+    { label: "Email", key: "email" },
+    { label: "Product Ordered", key: "productOrdered" }
+  ];
+
   const newProduct = async () => {
     if (name && price && stall2 && selectedFile) {
       try {
@@ -62,9 +71,9 @@ export default function Admin() {
   const newStall = async () => {
     if (name && selectedFile) {
       try {
-        const data = new FormData()
-        data.append('name', name)
-        data.append('photo', selectedFile)
+        const data = new FormData();
+        data.append('name', name);
+        data.append('photo', selectedFile);
         const res = await axios.post('/api/products/stalls', data)
         handleCloseNewStall()
         setName('')
@@ -128,6 +137,24 @@ export default function Admin() {
             </Table>
           </Tab>
           <Tab eventKey="bills" title="Bills">
+            <CSVLink
+              filename={'report_sanpham.csv'}
+              className='mt-3 mb-3 btn btn-primary float-right'
+              separator={";"}
+              data={
+                bills.map((bill, index) => {
+                  return {
+                    number: index + 1,
+                    name: bill.user.name,
+                    email: bill.user.email,
+                    productOrdered: Object.keys(bill.products).map(e => {
+                      return `${getProductById(e).name} x ${bill.products[`${e}`]}`;
+                    })
+                  }
+                })
+              }
+              headers={headers}
+            >Xuất file</CSVLink>
             <Table striped bordered hover style={{ margin: '8px 0 4px' }}>
               <thead>
                 <tr>
@@ -143,13 +170,95 @@ export default function Admin() {
                   <td>{bill.user.name}</td>
                   <td>{bill.user.email}</td>
                   <td>
-                    {Object.keys(bill.products).map(e => {
-                      return <div>{getProductById(e).name} x {bill.products[`${e}`]}</div>
-                    })}
+                    {
+                      Object.keys(bill.products).map(e => {
+                        return <div>{getProductById(e).name} x {bill.products[`${e}`]}</div>
+                      })
+                    }
                   </td>
                 </tr>) : ''}
               </tbody>
             </Table>
+          </Tab>
+          <Tab eventKey="report" title="Report">
+            <div className='mt-5 ml-5'>
+              <h3>Download your report</h3>
+              <div
+                style={{
+                  display: 'block'
+                }}
+              >
+                <input type="checkbox" name="checkbox" id="checkbox" />
+                <CSVLink
+                  filename={'report_sanpham.csv'}
+                  className='ml-3 mt-3'
+                  separator={";"}
+                  data={
+                    bills.map((bill, index) => {
+                      return {
+                        number: index + 1,
+                        name: bill.user.name,
+                        email: bill.user.email,
+                        productOrdered: Object.keys(bill.products).map(e => {
+                          return `${getProductById(e).name} x ${bill.products[`${e}`]}`
+                        })
+                      }
+                    })
+                  }
+                  headers={headers}
+                >{`report${2020}-tkb`}</CSVLink>
+              </div>
+              <div
+                style={{
+                  display: 'block'
+                }}
+              >
+                <input type="checkbox" name="checkbox" id="checkbox" />
+                <CSVLink
+                  filename={'report-2020-1.csv'}
+                  className='ml-3 mt-3'
+                  separator={";"}
+                  data={
+                    bills.map((bill, index) => {
+                      return {
+                        number: index + 1,
+                        name: bill.user.name,
+                        email: bill.user.email,
+                        productOrdered: Object.keys(bill.products).map(e => {
+                          return `${getProductById(e).name} x ${bill.products[`${e}`]}`
+                        })
+                      }
+                    })
+                  }
+                  headers={headers}
+                >{`report${2020}-1`}</CSVLink>
+              </div>
+              <div
+                style={{
+                  display: 'block'
+                }}
+              >
+                <input type="checkbox" name="checkbox" id="checkbox" />
+                <CSVLink
+                  filename={'report-fake.csv'}
+                  className='ml-3 mt-3'
+                  separator={";"}
+                  data={
+                    bills.map((bill, index) => {
+                      return {
+                        number: index + 1,
+                        name: bill.user.name,
+                        email: bill.user.email,
+                        productOrdered: Object.keys(bill.products).map(e => {
+                          return `${getProductById(e).name} x ${bill.products[`${e}`]}`
+                        })
+                      }
+                    })
+                  }
+                  headers={headers}
+                >report-fake</CSVLink>
+              </div>
+            </div>
           </Tab>
         </Tabs>
       </Col>
