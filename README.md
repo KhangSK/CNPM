@@ -1,6 +1,7 @@
 Make two terminals in repo:
 
 terminal 1:
+>cd server
 
 >npm install
 
