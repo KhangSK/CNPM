@@ -11,7 +11,7 @@ export default function Home() {
   const { products, stalls, isAuthenticated, addProductToBill } = useContext(GlobalContext)
 
   let token = localStorage.getItem('token')
-  let isAdmin
+  let isAdmin;
   if (token) {
     let user = jwt_decode(token)
     let { role } = user
@@ -71,39 +71,41 @@ export default function Home() {
         <Col style={{ margin: "0 16px 8px", padding: "8px", backgroundColor: "rgb(20, 120, 130)", textAlign: 'center' }}>STALL</Col>
       </Row>
 
-      {!!stall ? <>
-        <Button onClick={() => setStall('')} style={{ margin: '0 0 8px' }}>Back</Button>
-        {products ? <Row>
-          {products.filter(product => {
-            if (stall)
-              return product.stall == stall
-            else
-              return product
-          }).map(product => {
-            return <Col md={3} xs={6}>
-              <Card style={{ margin: 'auto', cursor: 'pointer' }}>
-                <Card.Img style={{ minHeight: '200px', maxHeight: '200px' }} variant="top" src={`/images/${product.image}`} />
-                <Card.Body>
-                  <Card.Title>{product.name}</Card.Title>
-                  <Card.Text>{product.price} VNĐ</Card.Text>
-                  <Button onClick={() => addProduct(product._id)} variant="primary">ADD</Button>
-                </Card.Body>
-              </Card>
-            </Col>
-          })}
-        </Row> : <h3>Loading...</h3>}
-      </> : <Row>
-          {!!stalls ? stalls.map(stall => {
-            return <Col md={3} xs={6}>
-              <Card onClick={() => setStall(stall._id)} style={{ margin: 'auto', cursor: 'pointer' }}>
-                <Card.Img style={{ minHeight: '200px', maxHeight: '200px' }} variant="top" src={`/images/${stall.image}`} />
-                <Card.Body>
-                  <Card.Title>{stall.name}</Card.Title>
-                </Card.Body>
-              </Card>
-            </Col>
-          }) : <Spinner animation="border" />}
-        </Row>}
+      {
+        !stall ? <>
+          <Button onClick={() => setStall('')} style={{ margin: '0 0 8px' }}>Back</Button>
+          {products ? <Row>
+            {products.filter(product => {
+              if (stall)
+                return product.stall == stall
+              else
+                return product
+            }).map(product => {
+              return <Col md={3} xs={6}>
+                <Card style={{ margin: 'auto', cursor: 'pointer' }}>
+                  <Card.Img style={{ minHeight: '200px', maxHeight: '200px' }} variant="top" src={`/images/${product.image}`} />
+                  <Card.Body>
+                    <Card.Title>{product.name}</Card.Title>
+                    <Card.Text>{product.price} VNĐ</Card.Text>
+                    <Button onClick={() => addProduct(product._id)} variant="primary">ADD</Button>
+                  </Card.Body>
+                </Card>
+              </Col>
+            })}
+          </Row> : <h3>Loading...</h3>}
+        </> : <Row>
+            {!stalls ? stalls.map(stall => {
+              return <Col md={3} xs={6}>
+                <Card onClick={() => setStall(stall._id)} style={{ margin: 'auto', cursor: 'pointer' }}>
+                  <Card.Img style={{ minHeight: '200px', maxHeight: '200px' }} variant="top" src={`/images/${stall.image}`} />
+                  <Card.Body>
+                    <Card.Title>{stall.name}</Card.Title>
+                  </Card.Body>
+                </Card>
+              </Col>
+            }) : <Spinner animation="border" />}
+          </Row>
+      }
 
       <Row>
         <Col style={{ margin: "8px 16px 4px", padding: "8px", backgroundColor: "rgb(20, 120, 130)", textAlign: 'center' }}>

@@ -1,14 +1,16 @@
-import React, { useContext, useState, useEffect } from 'react'
-import { Row, Col, Tabs, Tab, Table, Card, Button, Form, Modal } from 'react-bootstrap'
-import { Redirect } from 'react-router-dom'
-import jwt_decode from 'jwt-decode'
-import axios from 'axios'
+import React, { useContext, useState, useEffect, Fragment } from 'react';
+import { Row, Col, Tabs, Tab, Table, Card, Button, Form, Modal } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
+import jwt_decode from 'jwt-decode';
+import axios from 'axios';
+import { CSVLink, CSVDownload } from "react-csv";
+import { Link } from 'react-router-dom'
 
 import { GlobalContext } from '../context/GlobalContext'
 
 export default function Admin() {
   const { products, stalls, addNewStall, addNewProduct, bills, getBills } = useContext(GlobalContext)
-
+  debugger;
   useEffect(() => {
     getBills()
   }, [])
@@ -33,8 +35,17 @@ export default function Admin() {
 
   const [name, setName] = useState('')
   const [price, setPrice] = useState(1)
-  const [stall2, setStall2] = useState('')
+  const [stall2, setStall2] = useState('');
+  const [dateTime, setDatetime] = useState();
   const [selectedFile, setSelectedFile] = useState(null)
+
+  const headers = [
+    { label: "#", key: "number" },
+    { label: "Name", key: "name" },
+    { label: "Email", key: "email" },
+    { label: "Product Ordered", key: "productOrdered" },
+    { label: "DateTime Ordered", key: "createdAt" }
+  ];
 
   const newProduct = async () => {
     if (name && price && stall2 && selectedFile) {
@@ -62,9 +73,9 @@ export default function Admin() {
   const newStall = async () => {
     if (name && selectedFile) {
       try {
-        const data = new FormData()
-        data.append('name', name)
-        data.append('photo', selectedFile)
+        const data = new FormData();
+        data.append('name', name);
+        data.append('photo', selectedFile);
         const res = await axios.post('/api/products/stalls', data)
         handleCloseNewStall()
         setName('')
@@ -78,6 +89,49 @@ export default function Admin() {
 
   const getProductById = id => {
     return products.find(product => product._id == id)
+  }
+
+  const getDateAndTime = (email, id) => {
+    return bills
+      .filter((item) => {
+        return item.user.email === email && item._id === id
+      })
+      .map((bill, index) => {
+        const date = new Date(bill.createdAt);
+        const day = date.getDate();
+        const month = date.getMonth();
+        const year = date.getFullYear();
+        const hour = date.getHours();
+        const minutes = date.getMinutes();
+        return day + "-" + month + "-" + year + "; " + hour + " giờ " + minutes + " phút";
+      })
+  }
+
+  const getDateTimeDuplicates = () => {
+    let result = bills.map((bill, index) => {
+      const date = new Date(bill.createdAt);
+      const day = date.getDate();
+      const month = date.getMonth();
+      const year = date.getFullYear();
+      const hour = date.getHours();
+      const minutes = date.getMinutes();
+      return day + "-" + month + "-" + year + "; " + hour + " giờ " + minutes + " phút";
+    })
+    let unique = [...new Set(result)];
+    return unique;
+  }
+
+  const getDateDuplicates = () => {
+    let result = bills.map((bill, index) => {
+      const date = new Date(bill.createdAt);
+      const day = date.getDate();
+      const month = date.getMonth();
+      const year = date.getFullYear();
+      return day + "-" + month + "-" + year;
+    })
+    let unique = [...new Set(result)];
+    // setDatetime(unique);
+    return unique;
   }
 
   return (
@@ -116,7 +170,7 @@ export default function Admin() {
                   else
                     return product
                 }).map((product, index) => {
-                  return <tr>
+                  return <tr key={index}>
                     <td>{index + 1}</td>
                     <td> <Card.Img style={{ minWidth: '200px', maxWidth: '200px' }} variant="top" src={`/images/${product.image}`} /></td>
                     <td>{product.name}</td>
@@ -135,6 +189,7 @@ export default function Admin() {
                   <th>Name</th>
                   <th>Email</th>
                   <th>Products Ordered</th>
+                  <th>Date Time Ordered</th>
                 </tr>
               </thead>
               <tbody>
@@ -143,13 +198,93 @@ export default function Admin() {
                   <td>{bill.user.name}</td>
                   <td>{bill.user.email}</td>
                   <td>
-                    {Object.keys(bill.products).map(e => {
-                      return <div>{getProductById(e).name} x {bill.products[`${e}`]}</div>
-                    })}
+                    {
+                      Object.keys(bill.products).map(e => {
+                        return <div>{getProductById(e).name} x {bill.products[`${e}`]}</div>
+                      })
+                    }
                   </td>
+                  <td>{
+                    getDateAndTime(bill.user.email, bill._id)
+                  }</td>
                 </tr>) : ''}
               </tbody>
             </Table>
+          </Tab>
+          <Tab eventKey="report" title="Report">
+            <div className='mt-5 ml-5'>
+              <h3>Download your report</h3>
+              {
+                getDateDuplicates().map((item, index) => {
+                  return (
+
+                    <div
+                      style={{
+                        display: 'block'
+                      }}
+                    >
+                      <input type="checkbox" name="checkbox" id="checkbox" />
+                      <CSVLink
+                        filename={'report_sanpham.csv'}
+                        className='ml-3 mt-3'
+                        separator={";"}
+                        data={
+                          bills
+                            .filter((bill, index) => {
+                              const date = new Date(bill.createdAt);
+                              const day = date.getDate();
+                              const month = date.getMonth();
+                              const year = date.getFullYear();
+                              const dateBill = day + "-" + month + "-" + year;
+                              return dateBill == item;
+                            })
+                            .map((bill, index) => {
+                              return {
+                                number: index + 1,
+                                name: bill.user.name,
+                                email: bill.user.email,
+                                productOrdered: Object.keys(bill.products).map(e => {
+                                  return `${getProductById(e).name} x ${bill.products[`${e}`]}`
+                                }),
+                                createdAt: item
+                              }
+                            })
+                        }
+                        headers={headers}
+                      >{`report-${
+                        item
+                        }-tkb`}</CSVLink>
+                    </div>
+                  )
+                })
+              }
+              <div
+                style={{
+                  display: 'block'
+                }}
+              >
+                <input type="checkbox" name="checkbox" id="checkbox" />
+                <CSVLink
+                  filename={'report_sanpham.csv'}
+                  separator={";"}
+                  className='ml-3 mt-3'
+                  data={
+                    bills.map((bill, index) => {
+                      return {
+                        number: index + 1,
+                        name: bill.user.name,
+                        email: bill.user.email,
+                        productOrdered: Object.keys(bill.products).map(e => {
+                          return `${getProductById(e).name} x ${bill.products[`${e}`]}`;
+                        }),
+                        createdAt: getDateAndTime(bill.user.email, bill._id)
+                      }
+                    })
+                  }
+                  headers={headers}
+                >report all</CSVLink>
+              </div>
+            </div>
           </Tab>
         </Tabs>
       </Col>
