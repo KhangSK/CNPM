@@ -59,7 +59,14 @@ const Search = () => {
       <SearchBox onChange={onSearchChange} />
       {
         !stall ? <>
-          <Button onClick={() => setStall('')} style={{ margin: '0 0 8px' }}>Back</Button>
+          <Button style={{ margin: '0 0 8px' }}
+          >
+            <Link
+              style={{
+                color: "white"
+              }}
+              to='/'>Back</Link>
+          </Button>
           {
             products ?
               <Row>
