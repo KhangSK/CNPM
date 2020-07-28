@@ -5,7 +5,7 @@ import { toast } from 'react-toastify'
 import jwt_decode from 'jwt-decode'
 import { Redirect } from 'react-router-dom'
 
-import { GlobalContext } from '../context/GlobalContext'
+import { GlobalContext } from '../../context/GlobalContext'
 
 export default function Home() {
   const { products, stalls, isAuthenticated, addProductToBill } = useContext(GlobalContext)
@@ -72,15 +72,15 @@ export default function Home() {
       </Row>
 
       {
-        !stall ? <>
+        !!stall ? <>
           <Button onClick={() => setStall('')} style={{ margin: '0 0 8px' }}>Back</Button>
           {products ? <Row>
             {products.filter(product => {
               if (stall)
-                return product.stall == stall
+                return product.stall === stall
               else
                 return product
-            }).map(product => {
+            }).map((product, id) => {
               return <Col md={3} xs={6}>
                 <Card style={{ margin: 'auto', cursor: 'pointer' }}>
                   <Card.Img style={{ minHeight: '200px', maxHeight: '200px' }} variant="top" src={`/images/${product.image}`} />
@@ -94,7 +94,7 @@ export default function Home() {
             })}
           </Row> : <h3>Loading...</h3>}
         </> : <Row>
-            {!stalls ? stalls.map(stall => {
+            {stalls ? stalls.map(stall => {
               return <Col md={3} xs={6}>
                 <Card onClick={() => setStall(stall._id)} style={{ margin: 'auto', cursor: 'pointer' }}>
                   <Card.Img style={{ minHeight: '200px', maxHeight: '200px' }} variant="top" src={`/images/${stall.image}`} />

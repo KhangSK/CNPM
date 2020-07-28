@@ -47,4 +47,4 @@ router.post('/checkout',
     }
   })
 
-module.exports = router
+module.exports = router;

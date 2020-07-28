@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './search-box.styles.scss';
+import './search-box.scss';
 
 const SearchBox = ({ onChange }) => (
   <input

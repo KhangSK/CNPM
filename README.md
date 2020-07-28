@@ -14,3 +14,6 @@ terminal 2:
 >npm install
 
 >npm start
+
+create database restaurant in mongodb
+create colections: bills, products, stalls, users and then import file json db into

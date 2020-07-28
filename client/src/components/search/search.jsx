@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import jwt_decode from 'jwt-decode';
 import { Redirect } from 'react-router-dom';
-import SearchBox from './search-box/search-box.component';
-import { GlobalContext } from '../context/GlobalContext';
+import SearchBox from '../search-box/search-box';
+import { GlobalContext } from '../../context/GlobalContext';
 import accents from 'remove-accents';
 
 

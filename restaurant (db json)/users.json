@@ -1,0 +1,99 @@
+{ 
+    "_id" : ObjectId("5f13d406176554173cf4da12"), 
+    "role" : "user", 
+    "createdAt" : ISODate("2020-07-19T05:02:20.051+0000"), 
+    "name" : "huunhan", 
+    "email" : "huunhan@gmail.com", 
+    "password" : "$2a$10$1sW60IcefLd.zLRS758iNuIrBHaXJL9uAUw1r8qeJWu/cG1gC9bee", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5f0a9e4f91ebe85a087744c0"), 
+    "role" : "user", 
+    "createdAt" : ISODate("2020-07-12T05:22:24.361+0000"), 
+    "name" : "Trần Văn A", 
+    "email" : "email1@gmail.com", 
+    "password" : "$2a$10$RVkRZTNKh1Sv7MiB.X5a/e8usU7l/ykvJyR3XCYpYr9/odWyCbYmu", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5f0a9e8091ebe85a087744c1"), 
+    "role" : "admin", 
+    "createdAt" : ISODate("2020-07-12T05:22:24.361+0000"), 
+    "name" : "ADMIN", 
+    "email" : "admin", 
+    "password" : "$2a$10$K6rtryjUoO4ouqOTE40Rd.UAMLk2jcwrzg50RmXvbPV06MX6Q50wO", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5f0aa07f91ebe85a087744c4"), 
+    "role" : "user", 
+    "createdAt" : ISODate("2020-07-12T05:22:24.361+0000"), 
+    "name" : "hoang1", 
+    "email" : "hoang1@gmail.com", 
+    "password" : "$2a$10$qOSvfScfI1xB3y7toxfRTenIm1loYLLhNG3h0dWOVeUdj.IWzLC2G", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5f0daeaa5cb65a3048e6b759"), 
+    "role" : "admin", 
+    "createdAt" : ISODate("2020-07-14T13:05:51.077+0000"), 
+    "name" : "khang1", 
+    "email" : "khang1", 
+    "password" : "$2a$10$f.ZcbsWNPc0BnyQy7Jg8U.sqMgcjmwCZvOvYvyVKhbqryx3Zq8vwe", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5f13f5ea218c252f045c9250"), 
+    "role" : "admin", 
+    "createdAt" : ISODate("2020-07-19T06:24:10.447+0000"), 
+    "name" : "quoctrung123", 
+    "email" : "quoctrung123@gmail.com", 
+    "password" : "$2a$10$CMtbsg0xOJFjLC4O9cpQueKwlhW1XwveH2Kj5lbNOynpmB/9jilFq", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5f151c499fd4002cdc5b896c"), 
+    "role" : "user", 
+    "createdAt" : ISODate("2020-07-20T04:19:59.673+0000"), 
+    "name" : "quoctrung2", 
+    "email" : "quoctrung2@gmail.com", 
+    "password" : "$2a$10$Ie2uPSsvqRbbk6emI8v5fuvEidLL.zi7wVUnsICXcht7.m6/rtOQK", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5f1625928ff517305cc38980"), 
+    "role" : "user", 
+    "createdAt" : ISODate("2020-07-20T22:22:05.119+0000"), 
+    "name" : "long123", 
+    "email" : "long123@gmail.com", 
+    "password" : "$2a$10$u4eVdpYdsWwh1LksY0pF3etzigJ6PwfF3jd/XUXcQGs8d9p2NH/hK", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5f162b168ff517305cc38984"), 
+    "role" : "user", 
+    "createdAt" : ISODate("2020-07-20T22:22:05.119+0000"), 
+    "name" : "quoctrung", 
+    "email" : "quoctrung56@gmail.com", 
+    "password" : "$2a$10$fLaevTLd0vhrec8YH5jTNuGbrU2n/0C1LRadHXza68IpeQDcuyqeC", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5f166d3a4854f9374c134fb6"), 
+    "role" : "user", 
+    "createdAt" : ISODate("2020-07-21T04:20:18.200+0000"), 
+    "name" : "quoctrung163", 
+    "email" : "quoctrung163@gmail.com", 
+    "password" : "$2a$10$dW/ge4DqOdgrtHja4suzs.UC94OrbSF9rgastXSp6ZdZROr8ZeXra", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5f16e164a0643b0924de5775"), 
+    "role" : "user", 
+    "createdAt" : ISODate("2020-07-21T12:35:05.386+0000"), 
+    "name" : "khang1", 
+    "email" : "khang1@gmail.com", 
+    "password" : "$2a$10$rgVTlfmin66ZP2F6ylwE4uMG1wBFwQt3D8O5Asu0xLcntm/XEJWNW", 
+    "__v" : NumberInt(0)
+}

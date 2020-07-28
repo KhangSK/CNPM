@@ -1,0 +1,91 @@
+{ 
+    "_id" : ObjectId("5f1625a48ff517305cc38981"), 
+    "createdAt" : ISODate("2020-07-20T22:22:05.192+0000"), 
+    "user" : ObjectId("5f1625928ff517305cc38980"), 
+    "products" : "{\"5f0acdf36606585984329a28\":11}", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5f1625b68ff517305cc38982"), 
+    "createdAt" : ISODate("2020-07-20T22:22:05.192+0000"), 
+    "user" : ObjectId("5f13d406176554173cf4da12"), 
+    "products" : "{\"5f0acdf36606585984329a28\":3,\"5f0acd7f6606585984329a26\":3}", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5f1628ba8ff517305cc38983"), 
+    "createdAt" : ISODate("2020-07-20T22:22:05.192+0000"), 
+    "user" : ObjectId("5f1625928ff517305cc38980"), 
+    "products" : "{\"5f0aa06b91ebe85a087744c3\":4,\"5f0ace846606585984329a29\":4}", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5f162b288ff517305cc38985"), 
+    "createdAt" : ISODate("2020-07-20T22:22:05.192+0000"), 
+    "user" : ObjectId("5f162b168ff517305cc38984"), 
+    "products" : "{\"5f0acdf36606585984329a28\":3,\"5f0acd7f6606585984329a26\":5,\"5f0aceba6606585984329a2b\":3}", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5f162c059b0a8c1bc8109da2"), 
+    "createdAt" : ISODate("2020-07-20T23:42:38.257+0000"), 
+    "user" : ObjectId("5f1625928ff517305cc38980"), 
+    "products" : "{\"5f0acdf36606585984329a28\":5}", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5f16bb42f50db835f4717220"), 
+    "createdAt" : ISODate("2020-07-21T09:52:48.442+0000"), 
+    "user" : ObjectId("5f1625928ff517305cc38980"), 
+    "products" : "{\"5f0acdf36606585984329a28\":8}", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5f16e1a2a0643b0924de5776"), 
+    "createdAt" : ISODate("2020-07-21T12:35:05.472+0000"), 
+    "user" : ObjectId("5f16e164a0643b0924de5775"), 
+    "products" : "{\"5f0aa06b91ebe85a087744c3\":4,\"5f0acd7f6606585984329a26\":8}", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5f176b994a45f80e8c8a3875"), 
+    "createdAt" : ISODate("2020-07-21T20:14:50.670+0000"), 
+    "user" : ObjectId("5f16e164a0643b0924de5775"), 
+    "products" : "{\"5f0acdf36606585984329a28\":6}", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5f19a50aae1c1a1f188656d6"), 
+    "createdAt" : ISODate("2020-07-23T14:41:01.528+0000"), 
+    "user" : ObjectId("5f16e164a0643b0924de5775"), 
+    "products" : "{\"5f0acdf36606585984329a28\":4,\"5f0acd7f6606585984329a26\":3}", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5f1a3d533755390e2421d6a5"), 
+    "createdAt" : ISODate("2020-07-24T01:32:34.471+0000"), 
+    "user" : ObjectId("5f1625928ff517305cc38980"), 
+    "products" : "{\"5f1a3d0e3755390e2421d6a4\":8}", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5f1e62b1a0f37438c83042c0"), 
+    "createdAt" : ISODate("2020-07-27T01:14:57.180+0000"), 
+    "user" : ObjectId("5f1625928ff517305cc38980"), 
+    "products" : "{\"5f0acdf36606585984329a28\":5,\"5f0acd7f6606585984329a26\":1,\"5f0ace846606585984329a29\":1,\"5f0ace9f6606585984329a2a\":1}", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5f1e63daa0f37438c83042c1"), 
+    "createdAt" : ISODate("2020-07-27T01:14:57.180+0000"), 
+    "user" : ObjectId("5f13d406176554173cf4da12"), 
+    "products" : "{\"5f0ace9f6606585984329a2a\":1}", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5f202239d5cbc91e64cfdfbf"), 
+    "createdAt" : ISODate("2020-07-28T11:52:49.659+0000"), 
+    "user" : ObjectId("5f1625928ff517305cc38980"), 
+    "products" : "{\"5f0aa06b91ebe85a087744c3\":1,\"5f0ace846606585984329a29\":1}", 
+    "__v" : NumberInt(0)
+}

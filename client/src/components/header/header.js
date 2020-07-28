@@ -3,10 +3,10 @@ import { Navbar, Button, Modal, InputGroup, FormControl } from 'react-bootstrap'
 import jwt_decode from 'jwt-decode'
 import { Link } from 'react-router-dom'
 
-import setAuthToken from '../utils/setAuthToken'
-import clearToken from '../utils/clearToken'
+import setAuthToken from '../../utils/setAuthToken'
+import clearToken from '../../utils/clearToken'
 
-import { GlobalContext } from '../context/GlobalContext'
+import { GlobalContext } from '../../context/GlobalContext'
 
 export default function Header() {
   const { login, register, logout, isAuthenticated, setCurrentUser, setCurrentBill, getStalls, getProducts, user } = useContext(GlobalContext)
@@ -102,8 +102,14 @@ export default function Header() {
             <Button className="mr-3" variant="primary" onClick={handleLoginClick}>Login</Button>{' '}
             <Button className="mr-3" variant="primary" onClick={handleRegisterClick}>Register</Button>{' '}
           </> : <>
-              <Link className="mr-3" to='/search'>Search</Link>
-              {user && user.role != 'admin' ? <Link to='/checkout' className="mr-3" variant="info">Checkout</Link> : ''}{' '}
+              {
+                user && user.role != 'admin' ?
+                  <>
+                    <Link
+                      className="mr-3" to='/search'>Search</Link>
+                    <Link to='/checkout' className="mr-3" variant="info">Checkout</Link>
+                  </>
+                  : ''}{' '}
               <Button onClick={() => logout()} className="mr-3" variant="primary">Logout</Button>{' '}
             </>}
         </Navbar.Collapse>

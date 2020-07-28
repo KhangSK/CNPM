@@ -43,6 +43,13 @@ export default (state, action) => {
       }
     }
 
+    case 'DELETE_PRODUCT': {
+      return {
+        ...state,
+        products: state.products.filter(item => item._id !== action.payload)
+      }
+    }
+
     case 'ADD_PRODUCT_TO_BILL': {
       let id = action.payload
       if (state.bill && Object.keys(state.bill).includes(id)) {
