@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { Row, Col, Button } from 'react-bootstrap'
 import { Redirect } from 'react-router-dom'
 
-import { GlobalContext } from '../context/GlobalContext'
+import { GlobalContext } from '../../context/GlobalContext'
 import { toast } from 'react-toastify'
 
 export default function Checkout() {
@@ -67,7 +67,7 @@ export default function Checkout() {
           </Col>
         </Row> : ''
 
-      }) : <h4>No products to checkout</h4>}
+      }) : <h4>Checkout successfully! Please waiting, your item will come soon....</h4>}
 
       {Object.keys(bill).length !== 0 ? <><Row>
         <Col style={{ textAlign: 'left', paddingLeft: '56px' }} lg={6}>Total:</Col>

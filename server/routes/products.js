@@ -8,6 +8,8 @@ const isAdmin = require('../middleware/isAdmin')
 
 const Product = require('../models/Product')
 const Stall = require('../models/Stall')
+const { route } = require('./bills');
+const { ObjectId } = require('mongoose')
 
 // get all products
 router.get('/', async (req, res) => {
@@ -19,6 +21,15 @@ router.get('/', async (req, res) => {
   }
 })
 
+router.delete('/:id', async (req, res) => {
+  try {
+    const products = await Product
+      .findByIdAndRemove(req.params.id)
+      .then(() => 'Item deleted')
+  } catch (err) {
+    res.status(500).json({ server: 'ERR' })
+  }
+})
 
 router.post('/',
   passport.authenticate('jwt', { session: false }),

@@ -236,14 +236,41 @@ export const GlobalProvider = ({ children }) => {
 
   async function getBills() {
     try {
-      const res = await axios.get('/api/bills')
-
+      const res = await axios.get('/api/bills');
       dispatch({
         type: 'GET_BILLS',
         payload: res.data
       })
     } catch (err) {
       console.log(err)
+    }
+  }
+
+  function deleteProductWithId(id) {
+    try {
+      toast.success('Delete Successful!', {
+        position: "top-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      dispatch({
+        type: 'DELETE_PRODUCT',
+        payload: id
+      });
+    } catch (err) {
+      toast.warn('ERROR!', {
+        position: "top-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   }
 
@@ -268,7 +295,8 @@ export const GlobalProvider = ({ children }) => {
     logout,
     addNewStall,
     addNewProduct,
-    getBills
+    getBills,
+    deleteProductWithId
   }}>
     {children}
   </GlobalContext.Provider>)

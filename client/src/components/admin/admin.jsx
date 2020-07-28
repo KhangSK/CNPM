@@ -4,13 +4,12 @@ import { Redirect } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 import axios from 'axios';
 import { CSVLink, CSVDownload } from "react-csv";
-import { Link } from 'react-router-dom'
 
-import { GlobalContext } from '../context/GlobalContext'
+import { GlobalContext } from '../../context/GlobalContext';
 
 export default function Admin() {
-  const { products, stalls, addNewStall, addNewProduct, bills, getBills } = useContext(GlobalContext)
-  debugger;
+  const { products, stalls, addNewStall, addNewProduct, bills, getBills, deleteProductWithId } = useContext(GlobalContext)
+  // debugger;
   useEffect(() => {
     getBills()
   }, [])
@@ -47,6 +46,15 @@ export default function Admin() {
     { label: "DateTime Ordered", key: "createdAt" }
   ];
 
+  const deleteProduct = (id) => {
+    try {
+      const res = axios.delete(`/api/products/${id}`);
+      deleteProductWithId(id)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   const newProduct = async () => {
     if (name && price && stall2 && selectedFile) {
       try {
@@ -57,11 +65,11 @@ export default function Admin() {
         data.append('photo', selectedFile)
         const res = await axios.post('/api/products', data)
         handleCloseNewProduct()
-        setName('')
-        setPrice(1)
-        setStall2('')
-        setSelectedFile(null)
-        addNewProduct(res.data)
+        setName('');
+        setPrice(1);
+        setStall2('');
+        setSelectedFile(null);
+        addNewProduct(res.data);
       } catch (err) {
         console.log(err)
       }
@@ -123,11 +131,16 @@ export default function Admin() {
 
   const getDateDuplicates = () => {
     let result = bills.map((bill, index) => {
-      const date = new Date(bill.createdAt);
-      const day = date.getDate();
-      const month = date.getMonth();
-      const year = date.getFullYear();
-      return day + "-" + month + "-" + year;
+      const validProductIds = Object.keys(bill.products).filter(getProductById);
+      if (validProductIds.length === 0) {
+        return '';
+      } else {
+        const date = new Date(bill.createdAt);
+        const day = date.getDate();
+        const month = date.getMonth();
+        const year = date.getFullYear();
+        return day + "-" + month + "-" + year;
+      }
     })
     let unique = [...new Set(result)];
     // setDatetime(unique);
@@ -148,7 +161,7 @@ export default function Admin() {
                 <Col lg={3}>
                   <Form.Control as="select" onChange={e => setSelectedStall(e.target.value)}>
                     <option value=''>All stalls</option>
-                    {stalls ? stalls.map(stall => <option value={stall._id}>{stall.name}</option>) : ''}
+                    {stalls ? stalls.map((stall, index) => <option key={index} value={stall._id}>{stall.name}</option>) : ''}
                   </Form.Control>
                 </Col>
               </Row>
@@ -175,7 +188,11 @@ export default function Admin() {
                     <td> <Card.Img style={{ minWidth: '200px', maxWidth: '200px' }} variant="top" src={`/images/${product.image}`} /></td>
                     <td>{product.name}</td>
                     <td>{product.price}</td>
-                    <td><Button>Delete</Button></td>
+                    <td>
+                      <Button onClick={() => deleteProduct(product._id)}>
+                        Delete
+                      </Button>
+                    </td>
                   </tr>
                 })}
               </tbody>
@@ -193,21 +210,31 @@ export default function Admin() {
                 </tr>
               </thead>
               <tbody>
-                {bills ? bills.map((bill, index) => <tr>
-                  <td>{index + 1}</td>
-                  <td>{bill.user.name}</td>
-                  <td>{bill.user.email}</td>
-                  <td>
-                    {
-                      Object.keys(bill.products).map(e => {
-                        return <div>{getProductById(e).name} x {bill.products[`${e}`]}</div>
-                      })
+                {
+                  bills ? bills.map((bill, index) => {
+                    const validProductIds = Object.keys(bill.products).filter(getProductById)
+                    if (validProductIds.length === 0) {
+                      return null;
                     }
-                  </td>
-                  <td>{
-                    getDateAndTime(bill.user.email, bill._id)
-                  }</td>
-                </tr>) : ''}
+                    return (
+                      <tr key={index}>
+                        <td>{index + 1}</td>
+                        <td>{bill.user.name}</td>
+                        <td>{bill.user.email}</td>
+                        <td>
+                          {
+                            validProductIds.map((id, index) => {
+                              return <div key={index}>{getProductById(id).name} x {bill.products[`${id}`]}</div>;
+                            })
+                          }
+                        </td>
+                        <td>{
+                          getDateAndTime(bill.user.email, bill._id)
+                        }</td>
+                      </tr>
+                    );
+                  }) : ''
+                }
               </tbody>
             </Table>
           </Tab>
@@ -217,19 +244,20 @@ export default function Admin() {
               {
                 getDateDuplicates().map((item, index) => {
                   return (
-
                     <div
+                      key={index}
                       style={{
                         display: 'block'
                       }}
                     >
-                      <input type="checkbox" name="checkbox" id="checkbox" />
+                      {/* <input
+                        type="checkbox" name="checkbox" id="checkbox" /> */}
                       <CSVLink
                         filename={'report_sanpham.csv'}
                         className='ml-3 mt-3'
                         separator={";"}
                         data={
-                          bills
+                          bills ? bills
                             .filter((bill, index) => {
                               const date = new Date(bill.createdAt);
                               const day = date.getDate();
@@ -239,21 +267,34 @@ export default function Admin() {
                               return dateBill == item;
                             })
                             .map((bill, index) => {
-                              return {
-                                number: index + 1,
-                                name: bill.user.name,
-                                email: bill.user.email,
-                                productOrdered: Object.keys(bill.products).map(e => {
-                                  return `${getProductById(e).name} x ${bill.products[`${e}`]}`
-                                }),
-                                createdAt: item
+                              const validProductIds = Object.keys(bill.products).filter(getProductById);
+                              if (validProductIds.length === 0) {
+                                return {
+                                  number: index + 1,
+                                  name: bill.user.name,
+                                  email: bill.user.email,
+                                  productOrdered: "sản phẩm này đã bị xóa, không tồn tại",
+                                  createdAt: ""
+                                }
                               }
-                            })
+                              else {
+                                return {
+                                  number: index + 1,
+                                  name: bill.user.name,
+                                  email: bill.user.email,
+                                  productOrdered: validProductIds.map(e => {
+                                    return `${getProductById(e).name} x ${bill.products[`${e}`]}`;
+                                  }),
+                                  createdAt: item
+                                }
+                              }
+                            }) : ""
                         }
                         headers={headers}
-                      >{`report-${
-                        item
-                        }-tkb`}</CSVLink>
+                      > {
+                          (item === '') ? null : `report-${item}`
+                        }
+                      </CSVLink>
                     </div>
                   )
                 })
@@ -263,7 +304,8 @@ export default function Admin() {
                   display: 'block'
                 }}
               >
-                <input type="checkbox" name="checkbox" id="checkbox" />
+                {/* <input
+                  type="checkbox" name="checkbox" id="checkbox" /> */}
                 <CSVLink
                   filename={'report_sanpham.csv'}
                   separator={";"}
@@ -275,7 +317,11 @@ export default function Admin() {
                         name: bill.user.name,
                         email: bill.user.email,
                         productOrdered: Object.keys(bill.products).map(e => {
-                          return `${getProductById(e).name} x ${bill.products[`${e}`]}`;
+                          if (typeof (getProductById(e)) === 'undefined') {
+                            return '';
+                          } else {
+                            return `${getProductById(e).name} x ${bill.products[`${e}`]}`;
+                          }
                         }),
                         createdAt: getDateAndTime(bill.user.email, bill._id)
                       }
@@ -300,7 +346,7 @@ export default function Admin() {
             <Form.Group>
               <Form.Control style={{ marginBottom: '12px' }} as="select" onChange={e => setStall2(e.target.value)}>
                 <option value=''>Choose stall of new product</option>
-                {stalls ? stalls.map(stall => <option value={stall._id}>{stall.name}</option>) : ''}
+                {stalls ? stalls.map((stall, index) => <option key={index} value={stall._id}>{stall.name}</option>) : ''}
               </Form.Control>
               <Form.File
                 onChange={(e) => setSelectedFile(e.target.files[0])}

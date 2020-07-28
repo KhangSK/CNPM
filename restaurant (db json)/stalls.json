@@ -1,0 +1,18 @@
+{ 
+    "_id" : ObjectId("5f0aa05391ebe85a087744c2"), 
+    "name" : "Quầy cơm", 
+    "image" : "6680b90c709c2ada4b2facf227d649da", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5f0acd066606585984329a25"), 
+    "name" : "Quầy đồ ăn nhanh", 
+    "image" : "d2cb352212cbe590db4d9d725666c6b8", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5f0acde26606585984329a27"), 
+    "name" : "Quầy nước", 
+    "image" : "339a5b71a2608c38c0e76926e5c25ebd", 
+    "__v" : NumberInt(0)
+}

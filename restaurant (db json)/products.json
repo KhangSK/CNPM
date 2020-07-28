@@ -1,0 +1,64 @@
+{ 
+    "_id" : ObjectId("5f0aa06b91ebe85a087744c3"), 
+    "name" : "cơm gà", 
+    "price" : NumberInt(20000), 
+    "stall" : ObjectId("5f0aa05391ebe85a087744c2"), 
+    "image" : "dd3ed49684dd91f3331540c996f26f92", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5f0acd7f6606585984329a26"), 
+    "name" : "Combo FKC", 
+    "price" : NumberInt(60000), 
+    "stall" : ObjectId("5f0acd066606585984329a25"), 
+    "image" : "efa9c4ca6ef238b1e7806745f128d394", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5f0acdf36606585984329a28"), 
+    "name" : "Nước suối", 
+    "price" : NumberInt(6000), 
+    "stall" : ObjectId("5f0acde26606585984329a27"), 
+    "image" : "1312765f68fc47a9d200310122135f64", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5f0ace846606585984329a29"), 
+    "name" : "Bún cá hà nội", 
+    "price" : NumberInt(30000), 
+    "stall" : ObjectId("5f0aa05391ebe85a087744c2"), 
+    "image" : "da15d36955e20c9e39e19c04a6d10781", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5f0ace9f6606585984329a2a"), 
+    "name" : "Cơm chiên", 
+    "price" : NumberInt(25000), 
+    "stall" : ObjectId("5f0aa05391ebe85a087744c2"), 
+    "image" : "ad045def2b7e3470bbb7911c984b800e", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5f0aceba6606585984329a2b"), 
+    "name" : "Xôi cá rô đồng", 
+    "price" : NumberInt(15000), 
+    "stall" : ObjectId("5f0aa05391ebe85a087744c2"), 
+    "image" : "2c871b76efa189467563d50265888b9b", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5f0acf066606585984329a2c"), 
+    "name" : "Phở", 
+    "price" : NumberInt(30000), 
+    "stall" : ObjectId("5f0aa05391ebe85a087744c2"), 
+    "image" : "1d628aec724d4f2daaed85b4e8a01bd0", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5f1a3d0e3755390e2421d6a4"), 
+    "name" : "Pho ga", 
+    "price" : NumberInt(20000), 
+    "stall" : ObjectId("5f19b284ae1c1a1f188656d7"), 
+    "image" : "7088bba37971c1e3bf751576159d7d62", 
+    "__v" : NumberInt(0)
+}
