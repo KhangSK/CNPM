@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { Row, Col, Button } from 'react-bootstrap'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link, useLocation, useHistory } from 'react-router-dom'
 
 import { GlobalContext } from '../../context/GlobalContext'
 import { toast } from 'react-toastify'
@@ -37,8 +37,10 @@ export default function Checkout() {
 
   return (
     isAuthenticated ? <div style={{ margin: '0 20%', padding: '76px 0 20px', textAlign: 'center', backgroundColor: 'rgb(232, 232, 232)', minHeight: '90vh' }}>
+      <div style={{ display: 'flex'}}>
+        <Button><Link to='/' style={{ color: '#fff'}}>Quay lại menu</Link></Button>
+      </div>
       <h3>Bill ID: {dd + mm + yyyy}</h3>
-
       <div>{user.name}</div>
       <div>{mm + '/' + dd + '/' + yyyy}</div>
 

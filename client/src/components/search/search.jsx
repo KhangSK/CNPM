@@ -37,7 +37,7 @@ const Search = () => {
   const addProduct = id => {
     if (!isAuthenticated) {
       toast.warn('You must login to add product!', {
-        position: "top-right",
+        position: "top-left",
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,

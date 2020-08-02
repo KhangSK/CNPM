@@ -120,7 +120,8 @@ export default function Header() {
           <Modal.Title>{isLogin ? 'Login' : 'Register'}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {!isLogin ? <InputGroup className="mb-3">
+          {!isLogin ? <div className='mb-3'>
+            <InputGroup>
             <InputGroup.Prepend>
               <InputGroup.Text>
                 <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-person-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -135,8 +136,11 @@ export default function Header() {
               aria-describedby="Name"
               placeholder="Name"
             />
-          </InputGroup> : ''}
-          <InputGroup className="mb-3">
+          </InputGroup>
+          <smail><i>Name must be than 6 characters</i></smail>
+          </div> : ''}
+         <div className="mb-3" >
+         <InputGroup >
             <InputGroup.Prepend>
               <InputGroup.Text>
                 <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-mailbox" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -145,6 +149,7 @@ export default function Header() {
                   <path d="M5 7c0 .552-.448 0-1 0s-1 .552-1 0a1 1 0 0 1 2 0z" />
                 </svg>
               </InputGroup.Text>
+             
             </InputGroup.Prepend>
             <FormControl
               value={email}
@@ -154,7 +159,10 @@ export default function Header() {
               placeholder="Email"
             />
           </InputGroup>
-          <InputGroup className="mb-3">
+          <smail><i>Email must be valid</i></smail>
+         </div>
+          <div className="mb-3">
+          <InputGroup >
             <InputGroup.Prepend>
               <InputGroup.Text>
                 <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-key-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -171,7 +179,10 @@ export default function Header() {
               placeholder="Password"
             />
           </InputGroup>
-          {!isLogin ? <InputGroup className="mb-3">
+          <smail><i>Password must be than 6 characters</i></smail>
+          </div>
+          {!isLogin ? <div className="mb-3">
+            <InputGroup >
             <InputGroup.Prepend>
               <InputGroup.Text>
                 <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-key-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -187,7 +198,9 @@ export default function Header() {
               aria-describedby="Password Confirm"
               placeholder="Password Confirm"
             />
-          </InputGroup> : ''}
+          </InputGroup>
+          <smail><i>Password Confirm</i></smail>
+          </div> : ''}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

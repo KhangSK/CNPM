@@ -77,16 +77,19 @@ export const GlobalProvider = ({ children }) => {
     try {
       const res = await axios.post(`/api/auth/register`, userData)
 
-      toast.success('Register Successful!', {
-        position: "top-left",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      if(res.data.success) {
+        toast.success('Register Successful!', {
+          position: "top-left",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
     } catch (err) {
+      console.log(err)
       toast.warn('Register Failed!', {
         position: "top-left",
         autoClose: 5000,
