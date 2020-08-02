@@ -107,7 +107,7 @@ export default function Admin() {
       .map((bill, index) => {
         const date = new Date(bill.createdAt);
         const day = date.getDate();
-        const month = date.getMonth();
+        const month = date.getMonth() + 1;
         const year = date.getFullYear();
         const hour = date.getHours();
         const minutes = date.getMinutes();
